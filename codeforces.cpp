@@ -247,21 +247,86 @@
 
 
 
-#include<iostream>
-#include<string>
-using namespace std;
-int main(){
-    int n; cin>>n;
-    while(n--){
-        string s;
-        cin>>s;
-        if(s == "abc" || s == "acb" || s == "bac" || s == "cba"){
-            cout<<"YES"<<endl;
-        }
-        else{
-            cout<<"NO"<<endl;
-        }
-    }
-    return 0;
-}
+// #include<iostream>
+// #include<string>
+// using namespace std;
+// int main(){
+//     int n; cin>>n;
+//     while(n--){
+//         string s;
+//         cin>>s;
+//         if(s == "abc" || s == "acb" || s == "bac" || s == "cba"){
+//             cout<<"YES"<<endl;
+//         }
+//         else{
+//             cout<<"NO"<<endl;
+//         }
+//     }
+//     return 0;
+// }
 
+
+
+
+
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+    int GCGHCD2(int n, int m) {
+        while (n > 0 && m > 0) {
+            if (n > m) {
+                n = n % m;
+            } else {
+                m = m % n;
+            }
+        }
+        if (n == 0) return m;
+        return n;
+    }
+
+
+    int functioncheck(int n,vector<int> &nums){
+        vector<int> newnums;
+
+        for(int i=0; i<n; i++){
+            int maxi = INT_MIN;
+            for(int j=0; j<i; j++){
+                maxi = max(maxi,nums[j]);
+            }
+            newnums.push_back(GCGHCD2(nums[i],maxi));
+        }
+
+        sort(newnums.begin(),newnums.end());
+
+        vector<pair<int,int>> v;
+
+        int x = newnums.size();
+
+        for(int i=0; i<x/2; i++){
+            v.push_back({newnums[i],newnums[x-1-i]});
+        }
+
+        int ans = 0;
+
+        for(auto  it : v){
+            ans += GCGHCD2(it.first,it.second);
+        }
+        return ans;
+    }
+int main(){
+    int n,x;
+    cin>>n;
+    vector<int> nums;
+
+    for(int i=0; i<n; i++){
+        cin>>x;
+        nums.push_back(x);
+    }
+    cout<<functioncheck(n,nums);
+
+    return 0; 
+}

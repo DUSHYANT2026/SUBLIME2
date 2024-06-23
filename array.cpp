@@ -1,27 +1,27 @@
-#include<bits/stdc++.h>
-using namespace std;
-int main(){
-int n;
-cout<<"ENTER THE SIZE OF ARRAY:"<<endl;
-cin>>n;
-int a[n];
-for(int i=0;i<n;i++)
-cin>>a[i];
-cout<<"AFTER SORT HE ARRAY:"<<endl;
-sort(a,a+n);
-for(int i=0;i<n;i++)
-cout<<a[i]<<" ";
-cout<<endl;
-cout<<"THE LARGEST ELEMENT INT HE ARRAY:"<<endl;
-cout<<a[n-1]<<" ";
-cout<<"THE SECOND LARGEST ELEMENT IN THE ARRAY WHEN THERE IS NO DUPLICATE ELEMENTS:"<<endl;
-cout<<a[n-2]<<endl;
-cout<<"THE SECOND LARGEST ELEMENT IN THE ARRAY WHEN  THERE IS DUPLICARE ELEMENTS:"<<endl;
-for(int i=n-2;i>0;i--){
-if(a[i]!=a[n-1])
-cout<<a[i];
-break; }
-return 0; }
+// #include<bits/stdc++.h>
+// using namespace std;
+// int main(){
+// int n;
+// cout<<"ENTER THE SIZE OF ARRAY:"<<endl;
+// cin>>n;
+// int a[n];
+// for(int i=0;i<n;i++)
+// cin>>a[i];
+// cout<<"AFTER SORT HE ARRAY:"<<endl;
+// sort(a,a+n);
+// for(int i=0;i<n;i++)
+// cout<<a[i]<<" ";
+// cout<<endl;
+// cout<<"THE LARGEST ELEMENT INT HE ARRAY:"<<endl;
+// cout<<a[n-1]<<" ";
+// cout<<"THE SECOND LARGEST ELEMENT IN THE ARRAY WHEN THERE IS NO DUPLICATE ELEMENTS:"<<endl;
+// cout<<a[n-2]<<endl;
+// cout<<"THE SECOND LARGEST ELEMENT IN THE ARRAY WHEN  THERE IS DUPLICARE ELEMENTS:"<<endl;
+// for(int i=n-2;i>0;i--){
+// if(a[i]!=a[n-1])
+// cout<<a[i];
+// break; }
+// return 0; }
 
 // #include<iostream>
 // #include<climits>
