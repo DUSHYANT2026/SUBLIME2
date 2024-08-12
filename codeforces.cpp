@@ -287,8 +287,6 @@ using namespace std;
         if (n == 0) return m;
         return n;
     }
-
-
     int functioncheck(int n,vector<int> &nums){
         vector<int> newnums;
 
