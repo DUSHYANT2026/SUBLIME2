@@ -95,25 +95,25 @@ return 0;}
 // return 0;}
 
 
-// #include<iostream>
-// using namespace std;
-// int linear(int a[],int n,int key){
-// for(int i=0;i<n;i++){
-// if(a[i]==key)
-// return i+1;}
-// return -1;}
-// int main(){
-// int n,key;
-// cin>>n;
-// int a[n];
-// for(int i=0;i<n;i++)
-// cin>>a[i];
-// cin>>key;
-// for(int i=0;i<n;i++)
-// cout<<a[i]<<" ";
-// cout<<endl;
-// cout<<linear(a,n,key)<<endl;
-// return 0;}
+#include<iostream>
+using namespace std;
+int linear(int a[],int n,int key){
+for(int i=0;i<n;i++){
+if(a[i]==key)
+return i+1;}
+return -1;}
+int main(){
+int n,key;
+cin>>n;
+int a[n];
+for(int i=0;i<n;i++)
+cin>>a[i];
+cin>>key;
+for(int i=0;i<n;i++)
+cout<<a[i]<<" ";
+cout<<endl;
+cout<<linear(a,n,key)<<endl;
+return 0;}
 
 
 // #include<iostream>

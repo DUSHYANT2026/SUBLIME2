@@ -1,24 +1,24 @@
-// #include<iostream>
-// using namespace std;
-// int linera(int a[],int n ,int key){
-// for(int i=0;i<n;i++){
-// 	if (a[i]==key){
-// 	return i+1;
-// 	}
-// }return -1;
-// }
-// int main(){
-// int n;
-// cin>>n;
-// int a[n];
-// for(int i=0;i<n;i++){
-// 	cin>>a[i];
-// }
-// int key;
-// cin>>key;
-// cout<<linera(a,n,key)<<endl;
-// return 0;
-// }
+#include<iostream>
+using namespace std;
+int linera(int a[],int n ,int key){
+for(int i=0;i<n;i++){
+	if (a[i]==key){
+	return i+1;
+	}
+}return -1;
+}
+int main(){
+int n;
+cin>>n;
+int a[n];
+for(int i=0;i<n;i++){
+	cin>>a[i];
+}
+int key;
+cin>>key;
+cout<<linera(a,n,key)<<endl;
+return 0;
+}
 
 
 
