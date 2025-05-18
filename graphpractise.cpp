@@ -232,70 +232,258 @@
 
 
 
-#include <bits/stdc++.h>                // This question is same as the number of connected components or number of provinces
-using namespace std;
-class Solution {
-  private:
-    void dfscheck(int node, vector<int> &temp, vector<int>& vis, vector<int> graph[]){
-        vis[node] = 1;
-        temp.push_back(node);
-        for(auto it : graph[node]){
-            if(!vis[it]){
-                dfscheck(it,temp,vis,graph);
-            }
-        }
-    }
-  public:
-    vector<vector<int>> getComponents(int n, vector<vector<int>>& edges) {
-        vector<int> graph[n];
-        for(auto it : edges){
-            graph[it[0]].push_back(it[1]);
-            graph[it[1]].push_back(it[0]);
-        }
-        vector<int> vis(n,0);
-        vector<vector<int>> ans;
-        for(int i=0; i<n; i++){
-            vector<int> temp;
-            if(!vis[i]){
-               dfscheck(i,temp,vis,graph);
-               sort(temp.begin(),temp.end());
-               ans.push_back(temp);
-               temp.clear();
-            }
-        }
-        return ans;
-    }
-};
-int main() {
-    int tc;
-    cin >> tc;
-    cin.ignore();
-    while (tc--) {
-        int V, E;
-        cin >> V >> E;
-        cin.ignore();
-        vector<vector<int>> edges;
-        for (int i = 1; i <= E; i++) {
-            int u, v;
-            cin >> u >> v;
-            edges.push_back({u, v});
-        }
+// #include <bits/stdc++.h>                // This question is same as the number of connected components or number of provinces
+// using namespace std;
+// class Solution {
+//   private:
+//     void dfscheck(int node, vector<int> &temp, vector<int>& vis, vector<int> graph[]){
+//         vis[node] = 1;
+//         temp.push_back(node);
+//         for(auto it : graph[node]){
+//             if(!vis[it]){
+//                 dfscheck(it,temp,vis,graph);
+//             }
+//         }
+//     }
+//   public:
+//     vector<vector<int>> getComponents(int n, vector<vector<int>>& edges) {
+//         vector<int> graph[n];
+//         for(auto it : edges){
+//             graph[it[0]].push_back(it[1]);
+//             graph[it[1]].push_back(it[0]);
+//         }
+//         vector<int> vis(n,0);
+//         vector<vector<int>> ans;
+//         for(int i=0; i<n; i++){
+//             vector<int> temp;
+//             if(!vis[i]){
+//                dfscheck(i,temp,vis,graph);
+//                sort(temp.begin(),temp.end());
+//                ans.push_back(temp);
+//                temp.clear();
+//             }
+//         }
+//         return ans;
+//     }
+// };
+// int main() {
+//     int tc;
+//     cin >> tc;
+//     cin.ignore();
+//     while (tc--) {
+//         int V, E;
+//         cin >> V >> E;
+//         cin.ignore();
+//         vector<vector<int>> edges;
+//         for (int i = 1; i <= E; i++) {
+//             int u, v;
+//             cin >> u >> v;
+//             edges.push_back({u, v});
+//         }
 
-        Solution obj;
-        vector<vector<int>> res = obj.getComponents(V, edges);
+//         Solution obj;
+//         vector<vector<int>> res = obj.getComponents(V, edges);
 
-        for (int i = 0; i < res.size(); i++) {
-            sort(res[i].begin(), res[i].end());
-        }
-        sort(res.begin(), res.end());
-        for (const auto &component : res) {
-            for (int node : component) {
-                cout << node << " ";
-            }
-            cout << endl;
-        }
-        cout << "~"
-             << "\n";
-    }
-    return 0;
-}
+//         for (int i = 0; i < res.size(); i++) {
+//             sort(res[i].begin(), res[i].end());
+//         }
+//         sort(res.begin(), res.end());
+//         for (const auto &component : res) {
+//             for (int node : component) {
+//                 cout << node << " ";
+//             }
+//             cout << endl;
+//         }
+//         cout << "~"
+//              << "\n";
+//     }
+//     return 0;
+// }
+
+
+
+
+
+// #include<bits/stdc++.h>
+// using namespace std;
+// class Solution {
+//   private:
+//     bool dfscheck(int node, int parent, vector<int>  &vis,vector<int> adj[]){
+//         vis[node] = 1;
+//         for(auto it : adj[node]){
+//             if(!vis[it]){
+//                 if(dfscheck(it,node,vis,adj)) return true;
+//             }
+//             else if(it != parent) return true;
+//         }
+//         return false;
+//     }
+//   public:
+//     int detectCycle(int n, vector<int> adj[]) {
+        
+//         vector<int> vis(n,0);
+        
+//         // for(int i=0; i<n; i++){
+//         //     if(!vis[i]){
+//         //         if(dfscheck(i,0,vis,adj) == true){
+//         //             return 1;
+//         //         }
+//         //     }
+//         // }
+//         // return 0;
+//         for (int i = 0; i < n; i++) {
+//         if (!vis[i]) {
+//             queue<pair<int, int>> q;
+//             q.push({i, -1});
+//             vis[i] = 1;
+            
+//             while (!q.empty()) {
+//                 int node = q.front().first; 
+//                 int parent = q.front().second;
+//                 q.pop();
+                
+//                 for (auto neighbor : adj[node]) {
+//                     if (!vis[neighbor]) {
+//                         vis[neighbor] = 1;
+//                         q.push({neighbor, node});
+//                     } else if (neighbor != parent) {
+//                         return 1; 
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     return 0;
+//     }
+// };
+// int main(){
+//     int tc;
+//     cin >> tc;
+//     while(tc--){
+//         int V, E;
+//         cin >> V >> E;
+//         vector<int>adj[V];
+//         for(int i = 0; i < E; i++){
+//             int u, v;
+//             cin >> u >> v;
+//             adj[u].push_back(v);
+//             adj[v].push_back(u);
+//         }
+//         Solution obj;
+//         int ans = obj.detectCycle(V, adj);
+//         cout << ans <<"\n"; 
+// cout << "~" << "\n";
+// }
+//     return 0;
+// }
+
+
+
+
+
+
+// #include <bits/stdc++.h>                   // topological order using dfs and (bfs)kahn's algorithm
+// using namespace std;
+// class Solution {
+//   private:
+//     void dfscheck(int node,vector<int> &ans, vector<int> &vis, vector<int> graph[]){
+//         vis[node] = 1;
+//         for(auto it : graph[node]){
+//             if(!vis[it]){
+//                 dfscheck(it,ans,vis,graph);
+//             }
+//         }
+//         ans.push_back(node);
+//     } 
+//   public:
+//     vector<int> topoSort(int n, vector<vector<int>>& edges) {
+//         vector<int> graph[n];
+//         for(auto it : edges){
+//             graph[it[0]].push_back(it[1]);
+//         }
+//         // vector<int> vis(n,0);
+//         // vector<int> ans;
+//         // for(int i=0; i<n; i++){
+//         //     if(!vis[i]){
+//         //         dfscheck(i,ans,vis,graph);
+//         //     }
+//         // }
+//         // reverse(ans.begin(),ans.end());
+//         // return ans;
+        
+//         vector<int> indegree(n,0);
+//         for(int i=0; i<n; i++){
+//             for(auto it : graph[i]){
+//                 indegree[it]++;
+//             }
+//         }
+//         queue<int> q;
+//         for(int i=0; i<n; i++){
+//             if(indegree[i] == 0){
+//                 q.push(i);
+//                 indegree[i]--;
+//             }
+//         }
+//         vector<int> ans;
+//         while(!q.empty()){
+//             auto it = q.front(); q.pop();
+//             ans.push_back(it);
+//             for(auto i : graph[it]){
+//                 indegree[i]--;
+//                 if(indegree[i] == 0){
+//                     q.push(i);
+//                 }
+//             }
+//         }
+//         return ans;
+//     }
+// };
+
+// int check(int V, vector<int> &res, vector<vector<int>> adj) {
+
+//     if (V != res.size())
+//         return 0;
+
+//     vector<int> map(V, -1);
+//     for (int i = 0; i < V; i++) {
+//         map[res[i]] = i;
+//     }
+//     for (int i = 0; i < V; i++) {
+//         for (int v : adj[i]) {
+//             if (map[i] > map[v])
+//                 return 0;
+//         }
+//     }
+//     return 1;
+// }
+// int main() {
+//     int T;
+//     cin >> T;
+//     while (T--) {
+//         int V, E;
+//         cin >> V >> E;
+
+//         int x = V;
+//         vector<vector<int>> adj(V);
+//         vector<vector<int>> edges;
+
+//         for (int i = 0; i < E; i++) {
+//             int u, v;
+//             cin >> u >> v;
+//             adj[u].push_back(v);
+//             edges.push_back({u, v});
+//         }
+
+//         Solution obj;
+//         vector<int> res = obj.topoSort(V, edges);
+//         bool ans = check(x, res, adj);
+//         if (ans)
+//             cout << "true\n";
+//         else
+//             cout << "false\n";
+//         cout << "~"
+//              << "\n";
+//     }
+
+//     return 0;
+// }
