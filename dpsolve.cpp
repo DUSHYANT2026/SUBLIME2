@@ -28,34 +28,92 @@
 //     }
 // };
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// class Solution {
+// public:
+//     int minFallingPathSum(vector<vector<int>>& grid) {
+//         int n = grid.size();
+//         int m = grid[0].size();
+
+//         vector<vector<int>> dp(n, vector<int>(m, 0));
+
+//         for (int j = 0; j < m; ++j) {
+//             dp[n-1][j] = grid[n-1][j];
+//         }
+//         for (int i = n - 2; i >= 0; --i) {
+//             for (int j = 0; j < m; ++j) {
+//                 int down = dp[i+1][j];
+//                 int downLeft = (j > 0) ? dp[i+1][j-1] : INT_MAX;
+//                 int downRight = (j < m-1) ? dp[i+1][j+1] : INT_MAX;
+
+//                 dp[i][j] = grid[i][j] + min({down, downLeft, downRight});
+//             }
+//         }
+//         int ans = INT_MAX;
+//         for (int j = 0; j < m; ++j) {
+//             ans = min(ans, dp[0][j]);
+//         }
+
+//         return ans;
+//     }
+// };
+// int main(){
+//     int t ; cin>>t;
+//     while(t--){
+//         Solution s1;
+//         vector<vector<int>> nums;
+//         int n; int m; int x;
+//         cin>>n>>m;
+
+//         for(int i=0; i<n; i++){
+//             vector<int> temp;
+//             for(int j=0; j<m; j++){
+//                 cin>>x;
+//                 temp.push_back(x);
+//             }
+//             nums.push_back(temp);
+//         }
+//         cout<<s1.minFallingPathSum(nums)<<endl;
+//     }
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
+
 #include<bits/stdc++.h>
 using namespace std;
 class Solution {
+private:
+    int mod = 1000000007;
+    int dpcheck(int i, int j, int ans, vector<vector<vector<int>>> &dp,vector<vector<int>> &grid, int k){
+        
+        ans = (ans + grid[i][j])%k;
+        if(i == 0 && j == 0) return ans == 0 ? 1 : 0;
+        if(dp[i][j][ans] != -1) return dp[i][j][ans];
+
+        
+        int count = 0; int count1 = 0;
+        if(i > 0){
+            count = dpcheck(i-1,j,ans,dp,grid,k);
+        }
+        if(j > 0){
+            count1 = dpcheck(i,j-1,ans, dp, grid,k);
+        }
+        return dp[i][j][ans] = (count+count1)%mod;
+    }
 public:
-    int minFallingPathSum(vector<vector<int>>& grid) {
-        int n = grid.size();
-        int m = grid[0].size();
-
-        vector<vector<int>> dp(n, vector<int>(m, 0));
-
-        for (int j = 0; j < m; ++j) {
-            dp[n-1][j] = grid[n-1][j];
-        }
-        for (int i = n - 2; i >= 0; --i) {
-            for (int j = 0; j < m; ++j) {
-                int down = dp[i+1][j];
-                int downLeft = (j > 0) ? dp[i+1][j-1] : INT_MAX;
-                int downRight = (j < m-1) ? dp[i+1][j+1] : INT_MAX;
-
-                dp[i][j] = grid[i][j] + min({down, downLeft, downRight});
-            }
-        }
-        int ans = INT_MAX;
-        for (int j = 0; j < m; ++j) {
-            ans = min(ans, dp[0][j]);
-        }
-
-        return ans;
+    int numberOfPaths(vector<vector<int>>& grid, int k) {
+        int n = grid.size(); int m = grid[0].size();
+        vector<vector<vector<int>>> dp(n, vector<vector<int>>(m, vector<int>(k, -1)));
+        return dpcheck(n-1,m-1,0,dp,grid,k);
     }
 };
 int main(){
@@ -63,9 +121,8 @@ int main(){
     while(t--){
         Solution s1;
         vector<vector<int>> nums;
-        int n; int m; int x;
-        cin>>n>>m;
-
+        int n; int m; int k; int x;
+        cin>>n>>m>>k;
         for(int i=0; i<n; i++){
             vector<int> temp;
             for(int j=0; j<m; j++){
@@ -74,7 +131,11 @@ int main(){
             }
             nums.push_back(temp);
         }
-        cout<<s1.minFallingPathSum(nums)<<endl;
+        cout<<s1.numberOfPaths(nums,k)<<endl;
     }
     return 0;
 }
+
+
+
+

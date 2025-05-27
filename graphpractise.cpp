@@ -487,3 +487,118 @@
 
 //     return 0;
 // }
+
+
+
+
+
+// // User function Template for C++
+// class Solution {
+//   private:
+//     void dfscheck(int node, vector<int> &vis, stack<int> &s, vector<pair<int,int>> graph[]){
+//         vis[node] = 1;
+//         for(auto it : graph[node]){
+//             if(!vis[it.first]){
+//                 dfscheck(it.first,vis,s,graph);
+//             }
+//         }
+//         s.push(node);
+//     }
+//   public:
+//     vector<int> shortestPath(int n, int E, vector<vector<int>>& edges) {
+//         // code here
+//         vector<pair<int,int>> graph[n];
+//         for(auto it : edges){
+//             graph[it[0]].push_back({it[1],it[2]});
+//         }
+//         vector<int> vis(n,0);
+//         stack<int> s;
+//         for(int i=0; i<n; i++){
+//             if(!vis[i]){
+//                 dfscheck(i,vis,s,graph);
+//             }
+//         }
+//         vector<int> ans(n,1e9);
+//         ans[0] = 0;
+        
+//         while(!s.empty()){
+//             auto it = s.top(); s.pop();
+//             for(auto i : graph[it]){
+//                 int node = i.first;
+//                 int dis = i.second;
+//                 if(ans[node] > ans[it] + dis){
+//                     ans[node] = ans[it] + dis;
+//                 }
+//             }
+//         }
+//         for(int i=0; i<n; i++){
+//             if(ans[i] == 1e9){
+//                 ans[i] = -1;
+//             }
+//         }
+//         return ans;
+//     }
+// };
+
+
+
+
+
+
+
+#include <bits/stdc++.h> 
+using namespace std;
+class Solution {
+public:
+    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
+        int n = grid.size(); int m = grid[0].size();
+        if(grid[0][0] == 1 || grid[n-1][m-1] == 1) return -1;
+        vector<vector<int>> ans(n,vector<int> (m,1e9));
+        queue<pair<pair<int,int>,int>> q;
+        q.push({{0,0},1});
+        ans[0][0] = 1;
+
+        while(!q.empty()){
+            auto it = q.front(); q.pop();
+            int row = it.first.first;
+            int col = it.first.second;
+            int dis = it.second;
+
+            if(row == n-1 && col == m-1) return dis;
+            vector<int> drow = {1,0,-1,0,1,-1,-1,1};
+            vector<int> dcol = {0,1,0,-1,1,1,-1,-1};
+            for(int i=0; i<8; i++){
+                int nrow = row + drow[i];
+                int ncol = col + dcol[i];
+                if(nrow >= 0 && ncol >= 0 && nrow < n && ncol < m && grid[nrow][ncol] == 0){
+                    if(ans[nrow][ncol] > dis + 1){
+                        ans[nrow][ncol] = dis + 1;
+                        q.push({{nrow,ncol},dis+1});
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+};
+int main(){
+    int t ; cin>>t;
+    while(t--){
+        Solution s1;
+        vector<vector<int>> nums;
+        int n; int m; int x;
+        cin>>n>>m;
+        for(int i=0; i<n; i++){
+            vector<int> temp;
+            for(int j=0; j<m; j++){
+                cin>>x;
+                temp.push_back(x);
+            }
+            nums.push_back(temp);
+        }
+        cout<<s1.shortestPathBinaryMatrix(nums)<<endl;
+    }
+    return 0;
+}
+
+
