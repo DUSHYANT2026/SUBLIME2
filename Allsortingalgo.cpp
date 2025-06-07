@@ -594,38 +594,100 @@
 
 
 
-#include<bits/stdc++.h>
+// #include<bits/stdc++.h>
+// using namespace std;
+// void merge(int s, int mid, int e, vector<int>& nums){
+// 	vector<int> temp;
+// 	int i = s; int j = mid+1; 
+
+// 	while(i <= mid && j <= e){
+// 		if(nums[i] < nums[j]) temp.push_back(nums[i++]);
+// 		else temp.push_back(nums[j++]);
+// 	}
+// 	while(i <= mid) temp.push_back(nums[i++]);
+// 	while(j <= e) temp.push_back(nums[j++]);
+
+// 	for(int k=0; k<temp.size(); k++) nums[k+s] = temp[k];
+// }
+// void mergesort(int s, int e, vector<int>& nums){
+// 	if(s >= e) return;
+// 	int mid = (s+e)/2;
+// 	mergesort(s,mid,nums);
+// 	mergesort(mid+1,e,nums);
+// 	merge(s,mid,e,nums);
+// }
+// int main(){
+// 	int n;
+// 	cin>>n;
+// 	int x;
+// 	vector<int> nums;
+// 	for(int i=0; i<n; i++){
+// 		cin>>x;
+// 		nums.push_back(x);
+// 	}
+// 	mergesort(0,n-1,nums);
+// 	for(auto it : nums) cout<<it<<" "; cout<<endl;
+// 	return 0;
+// }
+
+
+
+
+
+
+
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include <climits>
+
 using namespace std;
-void merge(int s, int mid, int e, vector<int>& nums){
-	vector<int> temp;
-	int i = s; int j = mid+1; 
 
-	while(i <= mid && j <= e){
-		if(nums[i] < nums[j]) temp.push_back(nums[i++]);
-		else temp.push_back(nums[j++]);
-	}
-	while(i <= mid) temp.push_back(nums[i++]);
-	while(j <= e) temp.push_back(nums[j++]);
+bool isBeautiful(long long num) {
+    string s = to_string(num);
+    unordered_map<char, int> digitCount;
+    
+    // Count each digit's occurrences
+    for (char c : s) {
+        digitCount[c]++;
+    }
+    
+    // Check if each digit's count matches its value
+    for (auto& pair : digitCount) {
+        int digit = pair.first - '0';
+        int count = pair.second;
+        if (digit != count) {
+            return false;
+        }
+    }
+    
+    return true;
+}
 
-	for(int k=0; k<temp.size(); k++) nums[k+s] = temp[k];
+long long findNextBeautifulNumber(long long N) {
+    // Binary search between N+1 and a large upper bound
+    long long left = N + 1;
+    long long right = LLONG_MAX; // Maximum possible value for long long
+    long long result = -1;
+    
+    while (left <= right) {
+        long long mid = left + (right - left) / 2;
+        
+        if (isBeautiful(mid)) {
+            result = mid;
+            right = mid - 1; // Try to find a smaller beautiful number
+        } else {
+            left = mid + 1;
+        }
+    }
+    
+    return result;
 }
-void mergesort(int s, int e, vector<int>& nums){
-	if(s >= e) return;
-	int mid = (s+e)/2;
-	mergesort(s,mid,nums);
-	mergesort(mid+1,e,nums);
-	merge(s,mid,e,nums);
-}
-int main(){
-	int n;
-	cin>>n;
-	int x;
-	vector<int> nums;
-	for(int i=0; i<n; i++){
-		cin>>x;
-		nums.push_back(x);
-	}
-	mergesort(0,n-1,nums);
-	for(auto it : nums) cout<<it<<" "; cout<<endl;
-	return 0;
+
+int main() {
+    long long N;
+    // cin >> N;
+    cout << findNextBeautifulNumber(250) << endl;
+    return 0;
 }

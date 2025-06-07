@@ -88,54 +88,129 @@
 
 
 
-#include<bits/stdc++.h>
-using namespace std;
-class Solution {
-private:
-    int mod = 1000000007;
-    int dpcheck(int i, int j, int ans, vector<vector<vector<int>>> &dp,vector<vector<int>> &grid, int k){
+// #include<bits/stdc++.h>
+// using namespace std;
+// class Solution {
+// private:
+//     int mod = 1000000007;
+//     int dpcheck(int i, int j, int ans, vector<vector<vector<int>>> &dp,vector<vector<int>> &grid, int k){
         
-        ans = (ans + grid[i][j])%k;
-        if(i == 0 && j == 0) return ans == 0 ? 1 : 0;
-        if(dp[i][j][ans] != -1) return dp[i][j][ans];
+//         ans = (ans + grid[i][j])%k;
+//         if(i == 0 && j == 0) return ans == 0 ? 1 : 0;
+//         if(dp[i][j][ans] != -1) return dp[i][j][ans];
 
         
-        int count = 0; int count1 = 0;
-        if(i > 0){
-            count = dpcheck(i-1,j,ans,dp,grid,k);
-        }
-        if(j > 0){
-            count1 = dpcheck(i,j-1,ans, dp, grid,k);
-        }
-        return dp[i][j][ans] = (count+count1)%mod;
-    }
-public:
-    int numberOfPaths(vector<vector<int>>& grid, int k) {
-        int n = grid.size(); int m = grid[0].size();
-        vector<vector<vector<int>>> dp(n, vector<vector<int>>(m, vector<int>(k, -1)));
-        return dpcheck(n-1,m-1,0,dp,grid,k);
-    }
-};
-int main(){
-    int t ; cin>>t;
-    while(t--){
-        Solution s1;
-        vector<vector<int>> nums;
-        int n; int m; int k; int x;
-        cin>>n>>m>>k;
-        for(int i=0; i<n; i++){
-            vector<int> temp;
-            for(int j=0; j<m; j++){
-                cin>>x;
-                temp.push_back(x);
-            }
-            nums.push_back(temp);
-        }
-        cout<<s1.numberOfPaths(nums,k)<<endl;
-    }
-    return 0;
-}
+//         int count = 0; int count1 = 0;
+//         if(i > 0){
+//             count = dpcheck(i-1,j,ans,dp,grid,k);
+//         }
+//         if(j > 0){
+//             count1 = dpcheck(i,j-1,ans, dp, grid,k);
+//         }
+//         return dp[i][j][ans] = (count+count1)%mod;
+//     }
+// public:
+//     int numberOfPaths(vector<vector<int>>& grid, int k) {
+//         int n = grid.size(); int m = grid[0].size();
+//         vector<vector<vector<int>>> dp(n, vector<vector<int>>(m, vector<int>(k, -1)));
+//         return dpcheck(n-1,m-1,0,dp,grid,k);
+//     }
+// };
+// int main(){
+//     int t ; cin>>t;
+//     while(t--){
+//         Solution s1;
+//         vector<vector<int>> nums;
+//         int n; int m; int k; int x;
+//         cin>>n>>m>>k;
+//         for(int i=0; i<n; i++){
+//             vector<int> temp;
+//             for(int j=0; j<m; j++){
+//                 cin>>x;
+//                 temp.push_back(x);
+//             }
+//             nums.push_back(temp);
+//         }
+//         cout<<s1.numberOfPaths(nums,k)<<endl;
+//     }
+//     return 0;
+// }
 
 
 
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// bool beautiful(int n){
+//     vector<int> nums;
+//     while(n != 0){
+//         nums.push_back(n%10);
+//         n = n/10;
+//     }
+//     unordered_map<int,int> mapp;
+//     for(auto it : nums) mapp[it]++;
+
+//     for(auto it :  mapp){
+//         if(it.first != it.second) return false;
+//     }
+//     return true;
+// }
+// int main(){
+//     int n;
+//     cin>>n;
+//     int ans = -1;
+//     for(int i = n+1; i <= INT_MAX; i++){
+//         if(beautiful(i)){
+//             ans = i;
+//             break;
+//         }
+//     }
+//     cout<<ans<<endl;
+//     return 0;
+// }
+
+
+
+// #include <iostream>
+// #include <string>
+// #include <unordered_map>
+
+// using namespace std;
+
+// bool isBeautiful(long long num) {
+//     string s = to_string(num);
+//     unordered_map<char, int> digitCount;
+    
+//     // Count each digit's occurrences
+//     for (char c : s) {
+//         digitCount[c]++;
+//     }
+    
+//     // Check if each digit's count matches its value
+//     for (auto& pair : digitCount) {
+//         int digit = pair.first - '0';
+//         int count = pair.second;
+//         if (digit != count) {
+//             return false;
+//         }
+//     }
+    
+//     return true;
+// }
+
+// long long beautifulNumber(long long N) {
+//     long long i = N + 1;
+//     while (true) {
+//         if (isBeautiful(i)) {
+//             return i;
+//         }
+//         i++;
+//     }
+// }
+
+// int main() {
+//     long long N;
+//     cin >> N;
+//     cout << beautifulNumber(N) << endl;
+//     return 0;
+// }
