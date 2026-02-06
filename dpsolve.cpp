@@ -139,35 +139,34 @@
 
 
 
-// #include<bits/stdc++.h>
-// using namespace std;
-// bool beautiful(int n){
-//     vector<int> nums;
-//     while(n != 0){
-//         nums.push_back(n%10);
-//         n = n/10;
-//     }
-//     unordered_map<int,int> mapp;
-//     for(auto it : nums) mapp[it]++;
+#include<bits/stdc++.h>
+using namespace std;
+bool beautiful(int n){
+    vector<int> nums;
+    while(n != 0){
+        nums.push_back(n%10);
+        n = n/10;
+    }
+    unordered_map<int,int> mapp;
+    for(auto it : nums) mapp[it]++;
 
-//     for(auto it :  mapp){
-//         if(it.first != it.second) return false;
-//     }
-//     return true;
-// }
-// int main(){
-//     int n;
-//     cin>>n;
-//     int ans = -1;
-//     for(int i = n+1; i <= INT_MAX; i++){
-//         if(beautiful(i)){
-//             ans = i;
-//             break;
-//         }
-//     }
-//     cout<<ans<<endl;
-//     return 0;
-// }
+    for(auto it :  mapp){
+        if(it.first != it.second) return false;
+    }
+    return true;
+}
+int main(){
+    int n;
+    cin>>n;
+    int ans = -1;
+    int s = n+1; int e = INT_MAX;
+    while(s <= e){
+        int mid = (s+e)/2;
+        if(beautiful(n) == true && )
+    }
+    cout<<ans<<endl;
+    return 0;
+}
 
 
 
